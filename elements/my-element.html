@@ -1,9 +1,31 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
-<polymer-element name="my-element" noscript>
+<polymer-element name="my-element" attributes="color">
   <template>
-    <span>Hello from <b>my-element</b>. This is my Shadow DOM.</span>
+    <span style="color: {{color}}">Hello from <b>my-element</b>. This is my Shadow DOM.</span>
     <core-ajax url="../data.json" auto response="{{resp}}"></core-ajax>
     <textarea value="{{resp}}"></textarea>
   </template>
+  <script>
+    Polymer('my-element', {
+      created: function() {
+        console.log("created");
+      },
+      ready: function() {
+            console.log("ready");
+      },
+      attached: function() {
+            console.log("attached");
+      },
+      domReady: function() {
+            console.log("domReady");
+      },
+      detached: function() {
+            console.log("detached");
+      },
+      attributeChanged: function(attrName, oldVal, newVal) {
+            console.log("attributeChanged: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+      }
+    });
+  </script>
 </polymer-element>
