@@ -4,7 +4,7 @@
   "authors": [
     "Edgar Banguero <edgar@live.com>"
   ],
-  "description": "Polymer WinJS sample",
+  "description": "Polymer WinJS samples",
   "main": "index.html",
   "keywords": [
     "winjs",
