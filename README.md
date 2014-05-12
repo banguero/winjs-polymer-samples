@@ -34,6 +34,11 @@ npm install -g bower
 
 > **Note:** You may need to use sudo (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to install Bower globally.
 
+Update bower dependencies for the current project
+```
+bower update
+```
+
 Run the following and the WinJS JavaScript and CSS files will be put in the `bin` directory:
 ```
 grunt test
