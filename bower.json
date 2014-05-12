@@ -15,8 +15,6 @@
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#~0.2.3",
-    "core-ajax": "Polymer/core-ajax#~0.2.3",
-    "core-elements": "Polymer/core-elements#~0.2.3",
-    "polymer-ui-elements": "Polymer/polymer-ui-elements#~0.2.3"
+    "core-ajax": "Polymer/core-ajax#~0.2.3"
   }
 }
