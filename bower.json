@@ -1,0 +1,22 @@
+{
+  "name": "polymer-winjs-sample",
+  "version": "0.0.1",
+  "authors": [
+    "Edgar Banguero <edgar@live.com>"
+  ],
+  "description": "Polymer WinJS sample",
+  "main": "index.html",
+  "keywords": [
+    "winjs",
+    "polymer"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.2.3",
+    "core-ajax": "Polymer/core-ajax#~0.2.3",
+    "core-elements": "Polymer/core-elements#~0.2.3",
+    "polymer-ui-elements": "Polymer/polymer-ui-elements#~0.2.3"
+  }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- 1. Load platform.js for polyfill support. -->
+    <script src="bower_components/platform/platform.js"></script>
+
+    <!-- 2. Use an HTML Import to bring in the element. -->
+    <link rel="import" href="elements/my-element.html">
+  </head>
+  <body>
+      <my-element></my-element>
+    <script>
+      // Wait for 'polymer-ready'. Ensures the element is upgraded.
+      window.addEventListener('polymer-ready', function(e) {
+    
+      });
+    </script>
+  </body>
+</html>
