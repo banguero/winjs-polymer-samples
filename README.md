@@ -20,10 +20,19 @@ Install the [grunt command-line interface](https://github.com/gruntjs/grunt-cli)
 npm install -g grunt-cli
 ```
 
+> **Note:** You may need to use sudo (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to install Grunt globally.
+
 Grunt dependencies are installed separately in each cloned git repo. Install the dependencies with:
 ```
 npm install
 ```
+
+Install bower
+```
+npm install -g bower
+```
+
+> **Note:** You may need to use sudo (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to install Bower globally.
 
 Run the following and the WinJS JavaScript and CSS files will be put in the `bin` directory:
 ```
