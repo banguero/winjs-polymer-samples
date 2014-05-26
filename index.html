@@ -11,10 +11,16 @@
         opacity: 0;
         /* other custom styles for unresolved elements - avoid FOUC (Flash of unstyled content) */
       }
+
+      .myPivot {
+        width:400px;
+        height: 600px;
+        border:1px solid gray;
+      }
     </style>
   </head>
   <body unresolved>
-      <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
+      <winjs-pivot class="myPivot" title="INBOX - EMAIL" selectedIndex="0">
         <winjs-pivot-item header="all">
           all content here
         </winjs-pivot-item>
