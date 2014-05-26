@@ -2,7 +2,13 @@
 
 <polymer-element name="winjs-pivot" tagName="Pivot">
   <template>
-    <content></content>
+    <div class="win-pivot-title">{{title}}</div>
+    <div class="win-pivot-headers"></div>
+    <div class="win-pivot-viewport">
+      <div class="win-pivot-surface">
+        <content></content>
+      </div>
+    </div>
   </template>
   <script>
     (function() {
@@ -34,7 +40,7 @@
               console.log("attributeChanged: " + attrName, 'old: ' + oldVal, 'new:', newVal);
         }
       });
-      
+
     })();
   </script>
 </polymer-element>
