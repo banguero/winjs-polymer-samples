@@ -5,8 +5,15 @@
 
     <link rel="import" href="elements/winjs-pivot.html"/>
     <link rel="import" href="elements/winjs-pivot-item.html"/>
+
+    <style>
+      [unresolved] {
+        opacity: 0;
+        /* other custom styles for unresolved elements - avoid FOUC (Flash of unstyled content) */
+      }
+    </style>
   </head>
-  <body>
+  <body unresolved>
       <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
         <winjs-pivot-item header="all">
           all content here
