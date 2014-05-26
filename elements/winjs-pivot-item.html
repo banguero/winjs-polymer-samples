@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-
+<script src="/winjs/js/base.js"></script>
 
 <polymer-element name="winjs-pivot-item" tagName="PivotItem" attributes="header">
   <template>
@@ -24,6 +24,7 @@
 
               this.setAttribute('role', 'tabpanel');
               WinJS.Utilities.addClass(this, "winjs-pivot-item");
+              this._processors = [WinJS.UI.processAll];
         },
 
         attached: function() {
@@ -56,7 +57,26 @@
             }
         },
 
-        header: "header"
+        header: "header",
+
+        _process: function PivotItem_process() {
+          var that = this;
+
+          if (this._processors) {
+              this._processors.push(function () {
+                  return WinJS.Utilities.Scheduler.schedulePromiseAboveNormal();
+              });
+          }
+
+          this._processed = (this._processors || []).reduce(function (promise, processor) {
+              return promise.then(function () {
+                  return processor(that.contentElement);
+              });
+          }, this._processed || WinJS.Promise.as());
+          this._processors = null;
+
+          return this._processed;
+        },
       });
     })();
   </script>
