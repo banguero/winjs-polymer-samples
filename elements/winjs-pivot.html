@@ -4,9 +4,10 @@
 <polymer-element name="winjs-pivot" tagName="Pivot">
   <template>
     <link rel="stylesheet" href="winjs-pivot.css">
+
     <div class="win-pivot-title">{{title}}</div>
     <div class="win-pivot-headers">headers go here</div>
-    <div class="win-pivot-viewport">
+    <div class="win-pivot-viewport" role="group">
       <div class="win-pivot-surface">
         <content></content>
       </div>
@@ -15,31 +16,131 @@
   <script>
     (function() {
 
+      function pivotDefaultHeaderTemplate(item) {
+          var element = document.createTextNode(typeof item.header === "object" ? JSON.stringify(item.header) : ('' + item.header));
+          return element;
+      }
+
+      var classNames = {
+          pivot: "win-pivot",
+          pivotLocked: "win-pivot-locked",
+          pivotTitle: "win-pivot-title",
+          pivotHeaders: "win-pivot-headers",
+          pivotHeader: "win-pivot-header",
+          pivotHeaderSelected: "win-pivot-header-selected",
+          pivotViewport: "win-pivot-viewport",
+          pivotSurface: "win-pivot-surface",
+      };
+
+      var navigationModes = {
+          api: "api",
+          inertia: "inertia",
+          none: "",
+          scroll: "scroll",
+      };
+      var eventNames = {
+          selectionChanged: "selectionchanged",
+          itemAnimationStart: "itemanimationstart",
+          itemAnimationEnd: "itemanimationend",
+      };
+      var MSManipulationEventStates = WinJS.Utilities._MSManipulationEvent;
+
       // Tab control which displays an item of content.
       Polymer('winjs-pivot', {
 
         created: function() {
-          console.log("created");
+          console.log("created winjs-pivot");
         },
 
         ready: function() {
-              console.log("ready");
+          console.log("ready winjs-pivot");
+          
+          this.setAttribute('role', 'tablist');
+          WinJS.Utilities.addClass(this, classNames.pivot);
+
+          this.addEventListener('click', this._headerClickedHandler.bind(this));
+          this._viewportElement = this.shadowRoot.querySelector(".win-pivot-viewport");
+          this._viewportElement.addEventListener("scroll", this._scrollHandler.bind(this));
+          this._viewportElement.addEventListener("MSManipulationStateChanged", this._MSManipulationStateChangedHandler.bind(this));
+
+          // even though polymer provides a polyfill for pointer events, let's just use the one in WinJS
+          WinJS.Utilities._addEventListener(this._viewportElement, "pointerdown", this._pointerDownHandler.bind(this));
+
+          this._offsetFromCenter = 0;
+          this._currentIndexOnScreen = 0;
+          this._loadId = 0;
+          this._navMode = navigationModes.none;
+          this._currentManipulationState = MSManipulationEventStates.MS_MANIPULATION_STATE_STOPPED;
         },
 
         attached: function() {
-              console.log("attached");
+          console.log("attached winjs-pivot");
         },
 
         domReady: function() {
-              console.log("domReady");
+          console.log("domReady winjs-pivot");
+          this._parse();
         },
 
         detached: function() {
-              console.log("detached");
+          console.log("detached winjs-pivot");
         },
 
         attributeChanged: function(attrName, oldVal, newVal) {
-              console.log("attributeChanged: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+          console.log("attributeChanged winjs-pivot: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+        },
+
+        // Gets the DOM element that hosts the Pivot.
+        element: {
+          get: function() {
+            return this;
+          }
+        },
+
+        // Gets or sets a value that specifies whether the Pivot is locked to the current item.
+        locked: {
+            get: function () {
+                return WinJS.Utilities.hasClass(this.element, WinJS.UI.Pivot._ClassName.pivotLocked);
+            },
+            set: function (value) {
+                WinJS.Utilities[value ? 'addClass' : 'removeClass'](this.element, WinJS.UI.Pivot._ClassName.pivotLocked);
+            }
+        },
+
+        _headerClickedHandler: function pivot_headerClickedHandler(ev) {
+
+        },
+
+        _MSManipulationStateChangedHandler: function pivot_MSManipulationStateChangedHandler(ev) {
+
+        },
+
+        _pointerDownHandler: function pivot_pointerDownHandler(ev) {
+
+        },
+
+        _scrollHandler: function pivot__scrollHandler(ev) {
+
+        },
+
+        _parse: function pivot_parse() {
+            var pivotItems = []
+            var pivotItemEl = this.firstElementChild;
+
+            while (pivotItemEl) {
+                WinJS.UI.processAll(pivotItemEl);
+
+                if (pivotItemEl.tagName.toLowerCase() === "winjs-pivot-item") {
+                    pivotItems.push(pivotItemEl);
+                } else {
+                    throw new WinJS.ErrorFromName("WinJS.UI.Pivot.InvalidContent", "InvalidContent");
+                }
+
+                var nextItemEl = pivotItemEl.nextElementSibling;
+                pivotItemEl = nextItemEl;
+            }
+
+            this.items = new WinJS.Binding.List(pivotItems);
         }
       });
 
