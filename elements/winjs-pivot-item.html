@@ -1,38 +1,59 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="winjs-pivot-item" tagName="PivotItem">
-  <link href="/winjs/css/ui-light.css" rel="stylesheet">
-
-  <script src="/winjs/js/base.js"></script>
-  <script src="/winjs/js/itemEventsHandler.js"></script>
-  <script src="/winjs/js/listViewEnums.js"></script>
-  <script src="/winjs/js/listViewUtils.js"></script>
-  <script src="/winjs/js/itemContainer.js"></script>
-
+<polymer-element name="winjs-pivot-item" tagName="PivotItem" attributes="header">
   <template>
-    <div id="el"><content></content></div>
+    <div class="win-pivot-item-content">
+      <content></content>
+    </div>
   </template>
   <script>
-    Polymer('winjs-itemcontainer', {
-      created: function() {
-        console.log("created");
-      },
-      ready: function() {
-            console.log("ready");
-      },
-      attached: function() {
-            console.log("attached");
-      },
-      domReady: function() {
-            console.log("domReady");
-            new WinJS.UI.ItemContainer(this.$.el);
-      },
-      detached: function() {
-            console.log("detached");
-      },
-      attributeChanged: function(attrName, oldVal, newVal) {
-            console.log("attributeChanged: " + attrName, 'old: ' + oldVal, 'new:', newVal);
-      }
-    });
+    (function() {
+
+      // Defines a Item of a Pivot control. 
+      Polymer('winjs-pivot-item', {
+
+        created: function() {
+          console.log("created");
+        },
+
+        ready: function() {
+              console.log("ready");
+              this.setAttribute('role', 'tabpanel');
+              alert(this.header);
+        },
+
+        attached: function() {
+              console.log("attached");
+        },
+
+        domReady: function() {
+              console.log("domReady");
+        },
+
+        detached: function() {
+              console.log("detached");
+        },
+
+        attributeChanged: function(attrName, oldVal, newVal) {
+              console.log("attributeChanged: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+        },
+
+        // Gets the DOM element that hosts the PivotItem.
+        element: {
+          get: function() {
+            return this;
+          }
+        },
+
+        // Gets the DOM element that hosts the PivotItem's content.
+        contentElement: {
+            get: function () {
+                return this.firstElementChild;
+            }
+        },
+
+        header: "header"
+      });
+    })();
   </script>
 </polymer-element>
