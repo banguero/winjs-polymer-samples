@@ -1,21 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
+
 <polymer-element name="winjs-pivot-item" tagName="PivotItem" attributes="header">
   <template>
-    <style type="text/css">
-        :host  {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          top:27px;
-        }
-        :host .win-pivot-item-content {
-          height: 100%;
-          overflow-y: auto;
-          -ms-overflow-style: -ms-autohiding-scrollbar;
-          padding: 0px 19px;
-        }
-    </style>
+    <link rel="stylesheet" href="winjs-pivot-item.css">
 
     <div class="win-pivot-item-content">
       <content></content>
@@ -23,6 +11,17 @@
   </template>
   <script>
     (function() {
+
+      function pivotDefaultHeaderTemplate(item) {
+          var element = document.createTextNode(typeof item.header === "object" ? JSON.stringify(item.header) : ('' + item.header));
+          return element;
+      }
+
+      var eventNames = {
+          selectionChanged: "selectionchanged",
+          itemAnimationStart: "itemanimationstart",
+          itemAnimationEnd: "itemanimationend",
+      };
 
       // Defines a Item of a Pivot control. 
       Polymer('winjs-pivot-item', {
