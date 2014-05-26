@@ -44,17 +44,13 @@
         },
 
         // Gets the DOM element that hosts the PivotItem.
-        element: {
-          get: function() {
-            return this;
-          }
+        get elementHost() {
+          return this;
         },
 
         // Gets the DOM element that hosts the PivotItem's content.
-        contentElement: {
-            get: function () {
-                return this.firstElementChild;
-            }
+        get contentElement() {
+          return this.firstElementChild;
         },
 
         header: "header",

@@ -94,57 +94,52 @@
         },
 
         // Gets the DOM element that hosts the Pivot.
-        element: {
-          get: function() {
-            return this;
-          }
+        get elementHost() {
+          return this;
         },
 
         // Gets or sets a value that specifies whether the Pivot is locked to the current item.
-        locked: {
-          get: function () {
-              return WinJS.Utilities.hasClass(this.element, classNames.pivotLocked);
-          },
-          set: function (value) {
-              WinJS.Utilities[value ? 'addClass' : 'removeClass'](this.element, classNames.pivotLocked);
-          }
+        get locked() {
+          return WinJS.Utilities.hasClass(this.elementHost, classNames.pivotLocked);
+        },
+
+        set locked(value) {
+            WinJS.Utilities[value ? 'addClass' : 'removeClass'](this.elementHost, classNames.pivotLocked);
         },
 
         // Gets or sets the index of the item in view.
-        selectedIndex: {
-          get: function () {
-            if (this.items.length === 0) {
-                return -1;
-            }
+        get selectedIndex() {
+          if (this._items.length === 0) {
+              return -1;
+          }
 
-            if (+this._pendingIndexOnScreen === this._pendingIndexOnScreen) {
-                return this._pendingIndexOnScreen;
-            }
+          if (+this._pendingIndexOnScreen === this._pendingIndexOnScreen) {
+              return this._pendingIndexOnScreen;
+          }
 
-            return this._currentIndexOnScreen;
-          },
-          set: function (value) {
-            if (value >= 0 && value < this.items.length) {
-                if (this._pendingRefresh) {
-                    this._pendingIndexOnScreen = value;
-                } else {
-                    this._navMode = this._navMode || navigationModes.api;
-                    this._loadItem(value);
-                }
-            }
+          return this._currentIndexOnScreen;
+        },
+
+        set selectedIndex(value) {
+          if (value >= 0 && value < this._items.length) {
+              if (this._pendingRefresh) {
+                  this._pendingIndexOnScreen = value;
+              } else {
+                  this._navMode = this._navMode || navigationModes.api;
+                  this._loadItem(value);
+              }
           }
         },
 
         // Gets or sets the item in view. This property is useful for restoring a previous view when your app launches or resumes.
-        selectedItem: {
-          get: function () {
-              return this.items.getAt(this.selectedIndex);
-          },
-          set: function (value) {
-              var index = this.items.indexOf(value);
-              if (index !== -1) {
-                  this.selectedIndex = index;
-              }
+        get selectedItem() {
+          return this._items.getAt(this.selectedIndex);
+        },
+
+        set selectedItem (value) {
+          var index = this._items.indexOf(value);
+          if (index !== -1) {
+              this.selectedIndex = index;
           }
         },
 
@@ -196,7 +191,7 @@
                   this.selectedIndex = index;
               } else {
                   // Move focus into content for Narrator.
-                  WinJS.Utilities._setActiveFirstFocusableElement(this.selectedItem.element);
+                  WinJS.Utilities._setActiveFirstFocusableElement(this.selectedItem.elementHost);
               }
           }
         },
@@ -213,34 +208,40 @@
                 this._stoppedAndRecenteredSignal = null;
             }
             if (this.selectedItem) {
-                this.selectedItem.element.style[this._getDirectionAccessor()] = this._currentScrollTargetLocation + 'px';
+                this.selectedItem.elementHost.style[this._getDirectionAccessor()] = this._currentScrollTargetLocation + 'px';
             }
             console.log('_recenterUI index:' + this.selectedIndex + ' offset: ' + this._offsetFromCenter + ' scrollLeft: ' + this._currentScrollTargetLocation);
             this._viewportElement.scrollLeft = this._currentScrollTargetLocation;
         },
 
-        _currentScrollTargetLocation: {
-          get: function () {
-              // 49 pages before + current one is 50. There are also 50 afterwards.
-              return (50 + this._offsetFromCenter) * Math.ceil(this._viewportWidth);
-          }
+        get _currentScrollTargetLocation() {
+          // 49 pages before + current one is 50. There are also 50 afterwards.
+          return (50 + this._offsetFromCenter) * Math.ceil(this._viewportWidth);
         },
 
-        _viewportWidth: {
-          get: function () {
-              if (!this._viewportElWidth) {
-                  this._viewportElWidth = parseFloat(getComputedStyle(this._viewportElement).width);
-                  var snapPointsXInfo = WinJS.Utilities._browserStyleEquivalents["scroll-snap-points-x"];
-                  if (snapPointsXInfo) {
-                    this._viewportElement.style[snapPointsXInfo.scriptName] = "snapInterval(0%, " + Math.ceil(this._viewportElWidth) + "px)";
-                  }
+        get _viewportWidth() {
+          if (!this._viewportElWidth) {
+              this._viewportElWidth = parseFloat(getComputedStyle(this._viewportElement).width);
+              var snapPointsXInfo = WinJS.Utilities._browserStyleEquivalents["scroll-snap-points-x"];
+              if (snapPointsXInfo) {
+                this._viewportElement.style[snapPointsXInfo.scriptName] = "snapInterval(0%, " + Math.ceil(this._viewportElWidth) + "px)";
               }
-              return this._viewportElWidth || 1;
-          },
-          set: function (value) {
-              this._viewportElWidth = value;
           }
+          return this._viewportElWidth || 1;
         },
+
+        set _viewportWidth(value) {
+          this._viewportElWidth = value;
+        },
+        
+        get _rtl() {
+          return this._cachedRTL;
+        },
+
+        _getDirectionAccessor: function () {
+          return this._rtl ? "right" : "left";
+        },
+
 
         _hidePivotItem: function pivot_hidePivotItem(element, goPrevious) {
           var that = this;
@@ -308,7 +309,7 @@
               WinJS.log && WinJS.log('_scrollHandler ScrollPosition: ' + this._viewportElement.scrollLeft, "winjs pivot", "log");
               // Check if narrator user panned/scrolled the Pivot and we are now at an unsupported location.
               var diff = this._viewportElement.scrollLeft - this._currentScrollTargetLocation;
-              this._cachedRTL = getComputedStyle(this._element, null).direction === "rtl";
+              this._cachedRTL = getComputedStyle(this.elementHost, null).direction === "rtl";
               if (diff > 10) {
                   WinJS.log && WinJS.log('_scrollHandler diff > 1: ' + diff, "winjs pivot", "log");
                   this._goNext();
@@ -408,7 +409,7 @@
                 pivotItemEl = nextItemEl;
             }
 
-            this.items = new WinJS.Binding.List(pivotItems);
+            this._items = new WinJS.Binding.List(pivotItems);
         },
 
         _goPrevious: function pivot_goPrevious() {
@@ -435,7 +436,7 @@
             event.initCustomEvent(type, !!canBubble, !!cancelable, detail);
 
             // equivalent to polymer's fire method
-            return this.element.dispatchEvent(event);
+            return this.elementHost.dispatchEvent(event);
         },
 
         _renderHeaders: function pivot_renderHeaders(goPrevious) {
@@ -552,55 +553,26 @@
           WinJS.Utilities.Scheduler.schedule(this._applyProperties.bind(this), WinJS.Utilities.Scheduler.Priority.high);       
         },
 
-        _rtl: {
-            get: function () {
-                return this._cachedRTL;
-            }
-        },
-
-        _getDirectionAccessor: function () {
-            return this._rtl ? "right" : "left";
-        },
-
         _applyProperties: function pivot_applyProperties() {
             this._pendingRefresh = false;
 
-            if (this._pendingItems) {
-                this._items = this._pendingItems;
-                this._pendingItems = null;
-
-                // Remove any declaratively specified pivot items before attachItems.
-                while (this.element.firstElementChild !== this._titleElement) {
-                    var toRemove = this.element.firstElementChild;
-                    toRemove.parentNode.removeChild(toRemove);
-                }
-                WinJS.Utilities.empty(this._surfaceElement);
-            }
-
-            this._attachItems();
+            this._configureItems();
 
             var pendingIndexOnScreen = this._pendingIndexOnScreen;
             this._pendingIndexOnScreen = null;
             this._currentIndexOnScreen = 0;
             this._skipHeaderSlide = true;
-            this.selectedIndex = Math.min(pendingIndexOnScreen, this.items.length - 1);
+            this.selectedIndex = Math.min(pendingIndexOnScreen, this._items.length - 1);
             this._skipHeaderSlide = false;
             this._recenterUI();
         },
 
-        _attachItems: function pivot_attachItems() {
+        _configureItems: function pivot_configureItems() {
           this._measured = false;
-          for (var i = 0, len = this.items.length; i < len; i++) {
+          for (var i = 0, len = this._items.length; i < len; i++) {
               var item = this._items.getAt(i);
-
-              if (item.element.parentNode === this._surfaceElement) {
-                  throw new WinJS.ErrorFromName("WinJS.UI.Pivot.DuplicateItem", "DuplicateItem");
-              }
-
-              item.element.style.visibility = "hidden";
-              item.element.style.opacity = 0;
-
-              this._surfaceElement.appendChild(item.element);
+              item.elementHost.style.visibility = "hidden";
+              item.elementHost.style.opacity = 0;
           }
         },
 
@@ -675,7 +647,7 @@
 
         _loadItem: function pivot_loadItem(index) {
           var goPrevious = this._animateToPrevious;
-          this._cachedRTL = getComputedStyle(this._element, null).direction === "rtl";
+          this._cachedRTL = getComputedStyle(this.elementHost, null).direction === "rtl";
           this._loadId++;
           var loadId = this._loadId;
 
@@ -685,7 +657,7 @@
 
           if (this._currentItem) {
               // Hide existing item
-              this._hidePivotItem(this._currentItem.element, goPrevious);
+              this._hidePivotItem(this._currentItem.elementHost, goPrevious);
           }
 
           var oldIndex = this._currentIndexOnScreen;
@@ -733,10 +705,10 @@
               }
               if (loadId === that._loadId) {
                   // Position item:
-                  item.element.style[that._getDirectionAccessor()] = that._currentScrollTargetLocation + "px";
+                  item.elementHost.style[that._getDirectionAccessor()] = that._currentScrollTargetLocation + "px";
 
                   // Once the item is loaded show it and animate it in.
-                  that._showPivotItem(item.element, goPrevious);
+                  that._showPivotItem(item.elementHost, goPrevious);
 
                   WinJS.Promise.join([that._slideHeadersAnimation, that._showPivotItemAnimation, that._hidePivotItemAnimation]).then(function () {
                       (that._stoppedAndRecenteredSignal ? that._stoppedAndRecenteredSignal.promise : WinJS.Promise.wrap()).then(function () {
