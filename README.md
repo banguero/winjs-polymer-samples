@@ -202,6 +202,8 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 * Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is by exposing a specific element assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported in their polyfill?
 
+* What is the story for dev tools to extract metadata of web components?
+
 # Appendix
 
 ## Recommended Reading
