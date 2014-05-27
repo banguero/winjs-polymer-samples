@@ -73,7 +73,7 @@ button.win-pivot-header:hover:active {
   min-width: 0;
   font-size: 45pt;
   font-weight: 400;
-  font-family: "Segoe WP Semilight";
+  font-family: "Segoe WP Semilight", "Helvetica";
 }
 :host.win-pivot-locked .win-pivot-header {
   opacity: 0;

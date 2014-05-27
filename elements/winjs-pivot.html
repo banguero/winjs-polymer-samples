@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="winjs-pivot.css">
 
     <div class="win-pivot-title">{{title}}</div>
-    <div class="win-pivot-headers">headers go here</div>
+    <div class="win-pivot-headers"></div>
     <div class="win-pivot-viewport" role="group">
       <div class="win-pivot-surface">
         <content></content>
@@ -61,6 +61,7 @@
           this.addEventListener('click', this._headerClickedHandler.bind(this));
           this._viewportElement = this.shadowRoot.querySelector("." + classNames.pivotViewport);
           this._surfaceElement = this.shadowRoot.querySelector("." + classNames.pivotSurface);
+          this._headersContainerElement = this.shadowRoot.querySelector("." + classNames.pivotHeaders);
           this._viewportElement.addEventListener("scroll", this._scrollHandler.bind(this));
           this._viewportElement.addEventListener("MSManipulationStateChanged", this._MSManipulationStateChangedHandler.bind(this));
 
@@ -141,6 +142,23 @@
           if (index !== -1) {
               this.selectedIndex = index;
           }
+        },
+        
+        // Gets or sets the WinJS.Binding.List of PivotItem objects that belong to this Pivot.
+        get items() {
+          if (this._pendingItems) {
+              return this._pendingItems;
+          }
+          return this._items;
+        },
+
+        set items(value) {
+            var resetScrollPosition = !this._pendingItems;
+            this._pendingItems = value;
+            this._refresh();
+            if (resetScrollPosition) {
+                this._pendingIndexOnScreen = 0;
+            }
         },
 
         _headerClickedHandler: function pivot_headerClickedHandler(ev) {
@@ -242,7 +260,6 @@
           return this._rtl ? "right" : "left";
         },
 
-
         _hidePivotItem: function pivot_hidePivotItem(element, goPrevious) {
           var that = this;
           function cleanup() {
@@ -283,6 +300,7 @@
             var negativeTransform = (this._rtl && !goPrevious) || (goPrevious && !this._rtl);
 
             element.style.visibility = "";
+            element.style.opacity = 1;
 
             this._showPivotItemAnimation = WinJS.UI.Animation[negativeTransform ? "slideRightIn" : "slideLeftIn"](element, slideGroup1Els, slideGroup2Els, slideGroup3Els);
 
@@ -409,7 +427,7 @@
                 pivotItemEl = nextItemEl;
             }
 
-            this._items = new WinJS.Binding.List(pivotItems);
+            this.items = new WinJS.Binding.List(pivotItems);
         },
 
         _goPrevious: function pivot_goPrevious() {
@@ -556,6 +574,11 @@
         _applyProperties: function pivot_applyProperties() {
             this._pendingRefresh = false;
 
+            if (this._pendingItems) {
+              this._items = this._pendingItems;
+              this._pendingItems = null;
+            }
+
             this._configureItems();
 
             var pendingIndexOnScreen = this._pendingIndexOnScreen;
@@ -678,7 +701,7 @@
               this._offsetFromCenter++;
           }
 
-          if (this._currentManipulationState !== MSManipulationEventStates.MS_MANIPULATION_STATE_INERTIA) {
+          if (true || this._currentManipulationState !== MSManipulationEventStates.MS_MANIPULATION_STATE_INERTIA) {
               if (this._skipHeaderSlide) {
                   WinJS.log && WinJS.log('_skipHeaderSlide index:' + this.selectedIndex + ' offset: ' + this._offsetFromCenter + ' scrollLeft: ' + this._currentScrollTargetLocation, "winjs pivot", "log");
                   this._viewportElement.scrollLeft = this._currentScrollTargetLocation;
@@ -700,9 +723,6 @@
 
           // Start it hidden until it is loaded
           item._process().then(function () {
-              if (that._disposed) {
-                  return;
-              }
               if (loadId === that._loadId) {
                   // Position item:
                   item.elementHost.style[that._getDirectionAccessor()] = that._currentScrollTargetLocation + "px";
@@ -713,14 +733,10 @@
                   WinJS.Promise.join([that._slideHeadersAnimation, that._showPivotItemAnimation, that._hidePivotItemAnimation]).then(function () {
                       (that._stoppedAndRecenteredSignal ? that._stoppedAndRecenteredSignal.promise : WinJS.Promise.wrap()).then(function () {
                           WinJS.Promise.timeout(50).then(function () {
-                              if (that._disposed) {
-                                  return;
-                              }
                               if (loadId === that._loadId) {
                                   that._navMode = navigationModes.none;
 
                                   // Fire event even if animation didn't occur:
-                                  that._writeProfilerMark("itemAnimationStop,info");
                                   that._fireEvent(eventNames.itemAnimationEnd, true);
                               }
                           });
