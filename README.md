@@ -105,7 +105,7 @@ http://winjsrocks.com/polymer-samples/
 
 * WinJS ListView issue when used inside winjs-pivot-item webcomponent. The ListView's isZombie check to determine if it has been disposed relies on document.body.contains(this.element), which fails due to shallow dom encapsulation. For now, ui.js is always returning false for isZombie checks.
 
-* Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is exposing a specific element in the shadow DOM subtree by assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported?
+* Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is by exposing a specific element assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported in their polyfill?
 
 # Appendix
 
