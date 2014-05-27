@@ -7,6 +7,7 @@
   width:400px;
   height: 600px;
   border:1px solid gray;
+  margin: 20px;
 }
 
 core-list {
@@ -25,7 +26,7 @@ core-list {
 }
 
 .message {
-  line-height: 167%;
+  line-height: 137%;
   background-repeat: no-repeat;
   background-position: 10px 10px;
   background-size: 60px;
@@ -41,5 +42,5 @@ core-list {
 }
 
 .details {
-  font-size: 12px;
+  font-size: 14px;
 }

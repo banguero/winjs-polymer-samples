@@ -1,7 +1,15 @@
 html, body {
     height: 100%;
     margin: 0;
-    background-color: #000;
+    background-color: rgba(38, 0, 52, .9);
     color:#fff;
     font-family: "Open sans";
+}
+
+.logo {
+    margin:20px;
+}
+
+.win-pivot {
+    margin:20px;
 }

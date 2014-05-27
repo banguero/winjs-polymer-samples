@@ -12,7 +12,7 @@
   width: 100%;
   overflow: hidden;
   -ms-scroll-limit-x-max: 0px;
-  min-height: 500px;
+  background-color: #000;
 }
 .win-pivot-navbutton {
   transition: opacity linear 167ms;
