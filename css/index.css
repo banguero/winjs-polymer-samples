@@ -1,15 +1,26 @@
 html, body {
     height: 100%;
     margin: 0;
-    background-color: rgba(38, 0, 52, .9);
     color:#fff;
     font-family: "Open sans";
+}
+
+html {
+    background-color: rgba(38, 0, 52, .9);
 }
 
 .logo {
     margin:20px;
 }
 
-.win-pivot {
-    margin:20px;
+a.source, 
+a.source:active, 
+a.source:visited {
+    color: rgba(212, 14, 136, 1);
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.tagName {
+    margin-left: 20px;
 }

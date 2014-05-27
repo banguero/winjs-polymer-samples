@@ -709,7 +709,8 @@
               this._offsetFromCenter++;
           }
 
-          if (true || this._currentManipulationState !== MSManipulationEventStates.MS_MANIPULATION_STATE_INERTIA) {
+          if (!WinJS.Utilities._browserEventEquivalents["manipulationStateChanged"] ||
+            this._currentManipulationState !== MSManipulationEventStates.MS_MANIPULATION_STATE_INERTIA) {
               if (this._skipHeaderSlide) {
                   WinJS.log && WinJS.log('_skipHeaderSlide index:' + this.selectedIndex + ' offset: ' + this._offsetFromCenter + ' scrollLeft: ' + this._currentScrollTargetLocation, "winjs pivot", "log");
                   this._viewportElement.scrollLeft = this._currentScrollTargetLocation;
