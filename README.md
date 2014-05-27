@@ -5,9 +5,9 @@ Web Components is a set of specs which let web developers leverage their HTML, C
 
 Polymer (http://www.polymer-project.org/) is a library that uses the latest web technologies to let you create custom HTML elements. Its philosophy is "everything is an element". It divides its custom elements into two categories: UI elements (e.g. core-list, select) and Non UI elements (e.g. script, style, core-ajax). The lowest layer of Polymer is platform.js: a collection of libraries (or “polyfills”) for new web technologies that haven’t shipped yet across all browsers. Platform makes it possible for developers to use these standards today across all modern browsers. As these technologies are implemented in browsers, the polyfills will shrink and you’ll gain the benefits of native implementations. Platform.js automatically detects native support and switches to the fast path when available. Elements seamlessly start relying on the native stuff–and get faster in the process.
 
-The purpose of this repo is the experiment creating web components based on existing WinJS controls and compare the development experience.
+The purpose of this repo is to experiment creating web components based on existing WinJS controls, compare the development experience, and identify gaps in the current state of the specs.
 
-We start by building a `<winjs-pivot>` web component. Refer to (https://github.com/winjs/winjs/blob/master/src/js/WinJS/Controls/Pivot.js) for a reference to the source code of the existing WinJS Pivot control.
+We start by building a `<winjs-pivot>` web component. Refer to (https://github.com/winjs/winjs/blob/master/src/js/WinJS/Controls/Pivot.js) for the source code of the existing WinJS Pivot control.
 
 # Installation Steps
 
