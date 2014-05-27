@@ -38,9 +38,10 @@
 }
 .win-pivot-title {
   font-size: 14pt;
-  font-family: 'Segoe', 'Helvetica';
+  font-family: "Open sans";
   font-weight: 600;
   white-space: nowrap;
+  margin: 10px 0 0 20px
 }
 
 .win-pivot-headers {
@@ -61,7 +62,8 @@ button.win-pivot-header,
 button.win-pivot-header:hover,
 button.win-pivot-header:focus,
 button.win-pivot-header:hover:active {
-  background-color: transparent;
+  background-color: #000;
+  color: #fff;
   border: 0;
   outline: 0;
   margin: 0;
@@ -71,9 +73,9 @@ button.win-pivot-header:hover:active {
   overflow: visible;
   max-width: none;
   min-width: 0;
-  font-size: 45pt;
+  font-size: 40pt;
   font-weight: 400;
-  font-family: "Segoe WP Semilight", "Helvetica";
+  font-family: "Open sans";
 }
 :host.win-pivot-locked .win-pivot-header {
   opacity: 0;

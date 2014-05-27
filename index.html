@@ -1,45 +1,86 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>WinJS / Polymer sample</title>
+    <meta name="viewport" content="width=device-width">
+
     <script src="bower_components/platform/platform.js"></script>
     <script src="/winjs/js/base.js"></script>
+    <script src="/winjs/js/animations.js"></script>
 
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300italic,600,800|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- HTML imports -->
     <link rel="import" href="elements/winjs-pivot.html"/>
     <link rel="import" href="elements/winjs-pivot-item.html"/>
+    <link rel="import" href="../bower_components/core-list/core-list.html">
 
-    <style>
-      [unresolved] {
-        opacity: 0;
-        /* other custom styles for unresolved elements - avoid FOUC (Flash of unstyled content) */
-      }
-
-      .win-pivot {
-        width:400px;
-        height: 600px;
-        border:1px solid gray;
-      }
-    </style>
   </head>
   <body unresolved>
-      <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
-        <winjs-pivot-item header="all">
-          all content here
-        </winjs-pivot-item>
-        <winjs-pivot-item header="unread">
-          unread content here
-        </winjs-pivot-item>
-        <winjs-pivot-item header="flagged">
-          flagged content here
-        </winjs-pivot-item>
-        <winjs-pivot-item header="urgent">
-          urgent content here
-        </winjs-pivot-item>
-      </winjs-pivot>
+    <winjs-pivot-sample></winjs-pivot-sample>
+
+    <polymer-element name="winjs-pivot-sample">
+      <template>
+        <link rel="stylesheet" href="css/winjs-pivot-sample.css">
+
+        <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
+          <winjs-pivot-item header="all">
+            <core-list id="list" data="{{data}}" height="80">
+              <template repeat>
+                <div class="item">
+                  <div class="message">
+                    <div class="from">{{name}}</div>
+                    <div class="subject">{{subject}}</div>
+                    <div class="details">{{details}}</div>
+                  </div>
+                </div>
+              </template>
+            </core-list>
+          </winjs-pivot-item>
+
+          <winjs-pivot-item header="unread">
+            unread content here
+          </winjs-pivot-item>
+
+          <winjs-pivot-item header="flagged">
+            flagged content here
+          </winjs-pivot-item>
+
+          <winjs-pivot-item header="urgent">
+            urgent content here
+          </winjs-pivot-item>
+
+        </winjs-pivot>
+
+      </template>
 
       <script>
-        window.addEventListener('WebComponentsReady', function(e) {    
-          console.log("WebComponentsReady");
-        });
-    </script>
+        (function() {
+
+          Polymer('winjs-pivot-sample', {
+            count: 1000,
+            ready: function() {
+              this.data = this.generateData();
+            },
+            generateData: function() {
+              var data = [];
+              for (var i = 0; i < this.count; i++) {
+                data.push({ name: "Adam Smith", subject: "Missed conversation with Michael Brown", details: "Michael Brown [1:53 PM]: Thanks for taking the time..."});
+                data.push({ name: "Michael Brown", subject: "Need help later", details: "I was hoping you could help me with..."});
+                data.push({ name: "Thomas Lee", subject: "Lunch with you", details: "Any chance you want to do lunch on..."});
+                data.push({ name: "Michael Wilson", subject: "QuickStart's and How To's", details: "More information on how to use WinJS controls" });
+                data.push({ name: "Gary Paul", subject: "Going out saturday", details: "Jean and I are leaving..."});
+                data.push({ name: "Smith Jones", subject: "Happend every time", details: "I always end up going to the ..." });
+              }
+              return data;
+            },
+            tapAction: function(e) {
+              console.log('tap', e);
+            }
+          });
+        })();  
+      </script>
+    </polymer-element>
   </body>
 </html>

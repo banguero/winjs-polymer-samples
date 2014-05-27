@@ -1,0 +1,45 @@
+[unresolved] {
+  opacity: 0;
+  /* other custom styles for unresolved elements - avoid FOUC (Flash of unstyled content) */
+}
+
+.win-pivot {
+  width:400px;
+  height: 600px;
+  border:1px solid gray;
+}
+
+core-list {
+  height: 100%;
+}
+
+.item {
+  box-sizing: border-box;
+  height: 80px;
+  padding: 4px;
+  cursor: default;
+  background-color: #000;
+  color:#fff;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.message {
+  line-height: 167%;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  background-size: 60px;
+}
+
+.from {
+  display: inline;
+  font-size:24pt;
+}
+
+.subject {
+  color: rgba(212, 14, 136, 1);
+}
+
+.details {
+  font-size: 12px;
+}

@@ -57,10 +57,11 @@
           this.setAttribute('role', 'tablist');
           WinJS.Utilities.addClass(this, classNames.pivot);
 
-          this.addEventListener('click', this._headerClickedHandler.bind(this));
           this._viewportElement = this.shadowRoot.querySelector("." + classNames.pivotViewport);
           this._surfaceElement = this.shadowRoot.querySelector("." + classNames.pivotSurface);
           this._headersContainerElement = this.shadowRoot.querySelector("." + classNames.pivotHeaders);
+
+          this._headersContainerElement.addEventListener('click', this._headerClickedHandler.bind(this));
           this._viewportElement.addEventListener("scroll", this._scrollHandler.bind(this));
           this._viewportElement.addEventListener("MSManipulationStateChanged", this._MSManipulationStateChangedHandler.bind(this));
 
@@ -84,7 +85,7 @@
           // Hmm, in Chrome canary - domReady fires after all the nested win-pivot-items have been attached; however,
           // on other browsers, it does not wait for the children to be attached. What is the recommended pattern to determine
           // when the nested components are also attached? The WebComponentsReady event seems to work as a work-around in regular
-          // chrome, but it gets fired too early in Safari, using a random timeout for now
+          // Chrome, but it gets fired too early in Safari, using a random timeout for now
           var that = this;
           WinJS.Promise.timeout(1500).then(function() {
             that._parse();
@@ -169,7 +170,6 @@
         },
 
         _headerClickedHandler: function pivot_headerClickedHandler(ev) {
-          debugger;
           var header;
 
           if (this.locked) {
