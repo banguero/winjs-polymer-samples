@@ -52,6 +52,8 @@ http://winjsrocks.com/polymer-samples/
 
 # Demo Details
 
+## Markup
+
 ```html
 <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
   <winjs-pivot-item header="all">
@@ -78,9 +80,13 @@ http://winjsrocks.com/polymer-samples/
   </winjs-pivot-item>
 
   <winjs-pivot-item header="urgent">
-      <!-- WinJS.UI.ListView is WinJS's virtualized list control - lazy loaded inside winjs-pivot -->
+      <!-- WinJS.UI.ListView is WinJS's virtualized list control -->
     <div class="urgentLV" data-win-control="WinJS.UI.ListView" data-win-options="{ itemDataSource: Urgent.dataSource, layout: { type: WinJS.UI.ListLayout }, itemTemplate: select('.mailItemTemplate'), selectionMode: 'none' }"></div>
   </winjs-pivot-item>
 
 </winjs-pivot>
 ```
+
+## DOM visualization (in Chrome Canary)
+
+![winjs-pivot shadow-dom] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-27%20at%201.25.16%20AM.png)
