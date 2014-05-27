@@ -103,6 +103,102 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 ![winjs-pivot shadow-dom2] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-28%20at%2010.58.16%20AM.png)
 
+## `<winjs-pivot>` definition with Polymer
+
+```html
+<polymer-element name="winjs-pivot" constructor="Pivot">
+  <template>
+    <link rel="stylesheet" href="winjs-pivot.css">
+
+    <div class="win-pivot-title">{{title}}</div>
+    <div class="win-pivot-headers"></div>
+    <div class="win-pivot-viewport" role="group">
+      <div class="win-pivot-surface">
+        <content></content>
+      </div>
+    </div>
+  </template>
+  <script>
+    (function() {
+
+      ...
+
+      // Tab control which displays an item of content.
+      Polymer('winjs-pivot', {
+
+        created: function() {
+          console.log("created winjs-pivot");
+        },
+
+        ready: function() {
+          console.log("ready winjs-pivot");
+
+          this.setAttribute('role', 'tablist');
+          
+          // Initialization code here
+          
+          ....
+        },
+
+        attached: function() {
+          console.log("attached winjs-pivot");
+        },
+
+        domReady: function() {
+          console.log("domReady winjs-pivot");
+          ...
+        },
+
+        detached: function() {
+          console.log("detached winjs-pivot");
+        },
+
+        attributeChanged: function(attrName, oldVal, newVal) {
+          console.log("attributeChanged winjs-pivot: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+        },
+
+
+        // Gets or sets a value that specifies whether the Pivot is locked to the current item.
+        get locked() {
+          return WinJS.Utilities.hasClass(this.elementHost, classNames.pivotLocked);
+        },
+
+        set locked(value) {
+            WinJS.Utilities[value ? 'addClass' : 'removeClass'](this.elementHost, classNames.pivotLocked);
+        },
+
+        // Gets or sets the index of the item in view.
+        get selectedIndex() {
+          if (this._items.length === 0) {
+              return -1;
+          }
+
+          if (+this._pendingIndexOnScreen === this._pendingIndexOnScreen) {
+              return this._pendingIndexOnScreen;
+          }
+
+          return this._currentIndexOnScreen;
+        },
+
+        set selectedIndex(value) {
+          if (value >= 0 && value < this._items.length) {
+              if (this._pendingRefresh) {
+                  this._pendingIndexOnScreen = value;
+              } else {
+                  this._navMode = this._navMode || navigationModes.api;
+                  this._loadItem(value);
+              }
+          }
+        },
+        
+        ...
+      });
+
+    })();
+  </script>
+</polymer-element>
+```
+
 # Open Issues
 
 * What is the recommended way to define statics with polymer for polymer-element class? (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot-item.html). Looking for something different than (http://www.polymer-project.org/docs/polymer/polymer.html#static) where if the definition is `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">`, I would like to set `PivotItem.isDeclarativeControlContainer` to a function after `PivotItem` is defined.
