@@ -158,15 +158,6 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
         },
 
 
-        // Gets or sets a value that specifies whether the Pivot is locked to the current item.
-        get locked() {
-          return WinJS.Utilities.hasClass(this.elementHost, classNames.pivotLocked);
-        },
-
-        set locked(value) {
-            WinJS.Utilities[value ? 'addClass' : 'removeClass'](this.elementHost, classNames.pivotLocked);
-        },
-
         // Gets or sets the index of the item in view.
         get selectedIndex() {
           if (this._items.length === 0) {
