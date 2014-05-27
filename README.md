@@ -47,5 +47,6 @@ grunt test
 # Demo
 
 http://winjsrocks.com/polymer-samples/
+
 ![winjs-pivot] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-26%20at%2010.17.07%20PM.png)
 
