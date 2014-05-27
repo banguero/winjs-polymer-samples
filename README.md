@@ -105,7 +105,7 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 # Open Issues
 
-* What is the recommended way to define statics with polymer for polymer-element class? (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot-item.html). Looking for something different than (http://www.polymer-project.org/docs/polymer/polymer.html#static) where if the definition is `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">`, and I would like to set PivotItem.isDeclarativeControlContainer to a function after PivotItem is defined.
+* What is the recommended way to define statics with polymer for polymer-element class? (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot-item.html). Looking for something different than (http://www.polymer-project.org/docs/polymer/polymer.html#static) where if the definition is `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">`, I would like to set `PivotItem.isDeclarativeControlContainer` to a function after PivotItem is defined.
 
 * In Chrome canary - domReady fires after all the nested win-pivot-items have been attached; however, on other browsers (e.g. regular Chrome), it does not wait for the children to be attached. What is the recommended pattern to determine when the nested components are also attached? The WebComponentsReady event seems to work as a work-around in regular Chrome, but it gets fired too early in Safari, using a random timeout for now. (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot.html)
 
