@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<script src="/winjs/js/base.js"></script>
 
 <polymer-element name="winjs-pivot" tagName="Pivot">
   <template>
@@ -82,8 +81,16 @@
         domReady: function() {
           console.log("domReady winjs-pivot");
 
-          this._parse();
-          this._refresh();
+          // Hmm, in Chrome canary - domReady fires after all the nested win-pivot-items have been attached; however,
+          // on other browsers, it does not wait for the children to be attached. What is the recommended pattern to determine
+          // when the nested components are also attached? The WebComponentsReady event seems to work as a work-around in regular
+          // chrome, but it gets fired too early in Safari, using a random timeout for now
+          var that = this;
+          WinJS.Promise.timeout(1500).then(function() {
+            that._parse();
+            that._refresh();
+          });
+
         },
 
         detached: function() {
@@ -162,6 +169,7 @@
         },
 
         _headerClickedHandler: function pivot_headerClickedHandler(ev) {
+          debugger;
           var header;
 
           if (this.locked) {

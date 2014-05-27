@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<script src="/winjs/js/base.js"></script>
 
 <polymer-element name="winjs-pivot-item" tagName="PivotItem" attributes="header">
   <template>
@@ -24,6 +23,7 @@
 
               this.setAttribute('role', 'tabpanel');
               WinJS.Utilities.addClass(this, "winjs-pivot-item");
+              this.style.opacity = 0;
               this._processors = [WinJS.UI.processAll];
         },
 
