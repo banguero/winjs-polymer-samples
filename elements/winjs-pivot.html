@@ -308,7 +308,6 @@
             var negativeTransform = (this._rtl && !goPrevious) || (goPrevious && !this._rtl);
 
             element.style.visibility = "";
-            element.style.opacity = 1;
 
             this._showPivotItemAnimation = WinJS.UI.Animation[negativeTransform ? "slideRightIn" : "slideLeftIn"](element, slideGroup1Els, slideGroup2Els, slideGroup3Els);
 

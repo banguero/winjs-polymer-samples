@@ -6,7 +6,7 @@
 
     <script src="bower_components/platform/platform.js"></script>
     <script src="winjs/js/base.js"></script>
-    <script src="winjs/js/animations.js"></script>
+    <script src="winjs/js/ui.js"></script>
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300italic,600,800|Source+Code+Pro:400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
@@ -35,8 +35,8 @@
                 <div class="item">
                   <div class="message">
                     <div class="from">{{name}}</div>
-                    <div class="subject">{{subject}}</div>
-                    <div class="details">{{details}}</div>
+                    <div class="subject win-pivot-slide1">{{subject}}</div>
+                    <div class="details win-pivot-slide2">{{details}}</div>
                   </div>
                 </div>
               </template>
@@ -69,7 +69,7 @@
             },
             generateData: function() {
               var data = [];
-              for (var i = 0; i < this.count; i++) {
+              for (var i = 0; i < this.count / 6; i++) {
                 data.push({ name: "Adam Smith", subject: "Missed conversation with Michael Brown", details: "Michael Brown [1:53 PM]: Thanks for taking the time..."});
                 data.push({ name: "Michael Brown", subject: "Need help later", details: "I was hoping you could help me with..."});
                 data.push({ name: "Thomas Lee", subject: "Lunch with you", details: "Any chance you want to do lunch on..."});
