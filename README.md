@@ -111,7 +111,7 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 * WinJS Binding templates issue - declaring binding template directly in the body otherwise, we fail to find it due to shadow dom encapsulation (https://github.com/banguero/winjs-polymer-samples/blob/master/index.html)
 
-* WinJS ListView issue when used inside winjs-pivot-item webcomponent. The ListView's isZombie check to determine if it has been disposed relies on document.body.contains(this.element), which fails due to shallow dom encapsulation. For now, ui.js is always returning false for isZombie checks.
+* WinJS ListView issue when used inside `<winjs-pivot-item>` webcomponent. The ListView's `isZombie` check to determine if it has been disposed relies on `document.body.contains(this.element)`, which fails due to shallow dom encapsulation. For now, ui.js is always returning false for isZombie checks.
 
 * Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is by exposing a specific element assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported in their polyfill?
 
