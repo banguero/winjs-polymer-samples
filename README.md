@@ -1,7 +1,11 @@
 winjs-polymer-samples
 =====================
 
-Samples Using WinJS and Polymer
+Web Components is a set of specs which let web developers leverage their HTML, CSS and JavaScript knowledge to build widgets that can be reused easily and reliably.
+
+Polymer (http://www.polymer-project.org/) is a library that uses the latest web technologies to let you create custom HTML elements. Its philosophy is "everything is an element". Polymer divides its custom elements into two categories: UI elements (e.g. core-list, select) and Non UI elements (e.g. script, style, core-ajax). The lowest layer of Polymer is platform.js: a collection of libraries (or “polyfills”) for new web technologies that haven’t shipped yet across all browsers. Platform makes it possible for developers to use these standards today across all modern browsers. As these technologies are implemented in browsers, the polyfills will shrink and you’ll gain the benefits of native implementations. Platform.js automatically detects native support and switches to the fast path when available. Your elements seamlessly start relying on the native stuff–and get faster in the process.
+
+The purpose of this repo is the experiment creating web components based on existing WinJS control and compare the development experience.
 
 # Installation Steps
 
@@ -115,5 +119,6 @@ http://winjsrocks.com/polymer-samples/
 * Shadow DOM 201 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/)
 * Shadow DOM 301 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-301/)
 * Polymer (lots of info there) http://www.polymer-project.org/
+* Polymer core elements (http://polymer.github.io/core-docs/)
 
 
