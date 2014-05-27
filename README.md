@@ -204,6 +204,9 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 * What is the story for dev tools to extract metadata of web components?
 
+* How does polymer work with modules? For example, `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">` would expose a global 'PivotItem'. How does this interact with AMD? Is this a limitation of polymer only or of HTML imports?
+
+
 # Appendix
 
 ## Recommended Reading
