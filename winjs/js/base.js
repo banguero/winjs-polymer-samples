@@ -4895,6 +4895,12 @@ WinJS.Utilities._writeProfilerMark("WinJS.2.1 2.0.1.WinJS.2014.5.12 base.js,Star
                 elements.push(allElements[i]);
             }
 
+            // NOTE: ebang - webcomponents update
+            var isPivotItemWebComponent = rootElement.tagName.toLowerCase() === "winjs-pivot-item";
+            if (isPivotItemWebComponent) {
+                elements.push(rootElement);
+            }
+
             // bail early if there is nothing to process
             //
             if (elements.length === 0) {
@@ -4923,7 +4929,12 @@ WinJS.Utilities._writeProfilerMark("WinJS.2.1 2.0.1.WinJS.2014.5.12 base.js,Star
                     // already activated, don't need to add to controls array
                 }
                 else {
-                    controls[i] = control = getControlHandler(element);
+                    // NOTE: ebang - webcomponents update
+                    if (!isPivotItemWebComponent) {
+                        controls[i] = control = getControlHandler(element);
+                    } else {
+                        controls[i] = control = PivotItem;
+                    }
                 }
                 if (control && control.isDeclarativeControlContainer) {
                     i += element.querySelectorAll(selector).length;

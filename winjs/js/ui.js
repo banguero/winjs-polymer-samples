@@ -27254,7 +27254,10 @@ var _TRACE = function (text) {
                 _isZombie: function () {
                     // determines if this ListView is no longer in the DOM or has been cleared
                     //
-                    return this._disposed || !(this.element.firstElementChild && document.body.contains(this.element));
+                    return false;
+
+                    // Note: ebang - webcomponents - document.body.contains check fails with shadow dom
+                    //return this._disposed || !(this.element.firstElementChild && document.body.contains(this.element));
                 },
 
                 _ifZombieDispose: function () {

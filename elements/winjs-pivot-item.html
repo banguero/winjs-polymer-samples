@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="winjs-pivot-item" tagName="PivotItem" attributes="header">
+<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">
   <template>
     <link rel="stylesheet" href="winjs-pivot-item.css">
 
@@ -16,6 +16,23 @@
 
         created: function() {
           console.log("created winjs-pivot-item");
+
+          // What is the recommended way to define statics with polymer?
+          if (!PivotItem.isDeclarativeControlContainer) {
+            PivotItem.isDeclarativeControlContainer = WinJS.Utilities.markSupportedForProcessing(function (item, callback) {
+              if (callback === WinJS.UI.processAll) {
+                  return;
+              }
+
+              item._processors = item._processors || [];
+              item._processors.push(callback);
+
+              // Once processed the first time synchronously queue up new processors as they come in
+              if (item._processed) {
+                  item._process();
+              }
+            });
+          }
         },
 
         ready: function() {

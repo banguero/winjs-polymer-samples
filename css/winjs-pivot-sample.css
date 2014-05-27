@@ -44,3 +44,14 @@ core-list {
 .details {
   font-size: 14px;
 }
+
+.win-listview {
+  height: 100%;
+}
+
+.win-listview .win-container {
+  height: 80px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
