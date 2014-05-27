@@ -100,3 +100,20 @@ http://winjsrocks.com/polymer-samples/
 * WinJS Binding templates issue - declaring binding template directly in the body otherwise, we fail to find it due to shadow dom encapsulation (https://github.com/banguero/winjs-polymer-samples/blob/master/index.html)
 
 * WinJS ListView issue when used inside winjs-pivot-item webcomponent. The ListView's isZombie check to determine if it has been disposed relies on document.body.contains(this.element), which fails due to shallow dom encapsulation. For now, ui.js is always returning false for isZombie checks.
+
+
+# Appendix
+
+## Recommended Reading
+
+* Web Components explainer (http://w3c.github.io/webcomponents/explainer/)
+* Custom Elements spec (http://w3c.github.io/webcomponents/spec/custom/)
+* HTML imports spec (http://w3c.github.io/webcomponents/spec/imports/)
+* Templates spec (http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-template-element)
+* Shadow DOM spec (http://w3c.github.io/webcomponents/spec/shadow/)
+* Shadow DOM 101 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/)
+* Shadow DOM 201 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/)
+* Shadow DOM 301 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-301/)
+* Polymer (lots of info there) http://www.polymer-project.org/
+
+
