@@ -7,6 +7,8 @@ Polymer (http://www.polymer-project.org/) is a library that uses the latest web 
 
 The purpose of this repo is the experiment creating web components based on existing WinJS controls and compare the development experience.
 
+We start by building a `<winjs-pivot>` web component. Refer to (https://github.com/winjs/winjs/blob/master/src/js/WinJS/Controls/Pivot.js) for a reference to the source code of the existing WinJS Pivot control.
+
 # Installation Steps
 
 Clone a copy of the master winjs-polymer-samples git repo:
