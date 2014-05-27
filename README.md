@@ -43,3 +43,8 @@ Run the following and the WinJS JavaScript and CSS files will be put in the `bin
 ```
 grunt test
 ```
+
+# Demo
+
+http://winjsrocks.com/polymer-samples/
+https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-26%20at%2010.17.07%20PM.png
