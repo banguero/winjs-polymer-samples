@@ -95,7 +95,13 @@ http://winjsrocks.com/polymer-samples/
 
 ## DOM visualization (in Chrome Canary)
 
+`<winjs-pivot>` has a shadow root:
+
 ![winjs-pivot shadow-dom] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-27%20at%201.25.16%20AM.png)
+
+every `<winjs-pivot-item>` has its own shadow root, and depending on what it contains (e.g. `<core-list>` web component), it could have nested shadow roots.
+
+![winjs-pivot shadow-dom2] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-28%20at%2010.58.16%20AM.png)
 
 # Open Issues
 
