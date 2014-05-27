@@ -90,3 +90,11 @@ http://winjsrocks.com/polymer-samples/
 ## DOM visualization (in Chrome Canary)
 
 ![winjs-pivot shadow-dom] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-27%20at%201.25.16%20AM.png)
+
+# Open Issues
+
+* What is the recommended way to define statics with polymer for polymer-element class? (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot-item.html)
+
+* In Chrome canary - domReady fires after all the nested win-pivot-items have been attached; however, on other browsers (e.g. regular Chrome), it does not wait for the children to be attached. What is the recommended pattern to determine when the nested components are also attached? The WebComponentsReady event seems to work as a work-around in regular Chrome, but it gets fired too early in Safari, using a random timeout for now. (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot.html)
+
+* WinJS Binding templates issue - declaring binding template directly in the body otherwise, we fail to find it due to shadow dom encapsulation (https://github.com/banguero/winjs-polymer-samples/blob/master/index.html)
