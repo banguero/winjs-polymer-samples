@@ -95,7 +95,7 @@ http://winjsrocks.com/polymer-samples/
 
 ## DOM visualization (in Chrome Canary)
 
-`<winjs-pivot>` has a shadow root:
+`<winjs-pivot>` becomes a shadow host when Polymer calls internally `createShadowRoot`. Since the element has shadow DOM, its children are not rendered; the content of the shadow DOM is rendered instead.
 
 ![winjs-pivot shadow-dom] (https://raw.githubusercontent.com/banguero/winjs-polymer-samples/master/screenshots/Screen%20Shot%202014-05-27%20at%201.25.16%20AM.png)
 
