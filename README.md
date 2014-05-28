@@ -132,74 +132,74 @@ where `winjs-pivot.js` is defined as:
 
 ```javascript
 
-    (function() {
+(function() {
 
+  ...
+
+  // Tab control which displays an item of content.
+  Polymer('winjs-pivot', {
+
+    created: function() {
+      console.log("created winjs-pivot");
+    },
+
+    ready: function() {
+      console.log("ready winjs-pivot");
+
+      this.setAttribute('role', 'tablist');
+      
+      // Initialization code here
+      
+      ....
+    },
+
+    attached: function() {
+      console.log("attached winjs-pivot");
+    },
+
+    domReady: function() {
+      console.log("domReady winjs-pivot");
       ...
+    },
 
-      // Tab control which displays an item of content.
-      Polymer('winjs-pivot', {
+    detached: function() {
+      console.log("detached winjs-pivot");
+    },
 
-        created: function() {
-          console.log("created winjs-pivot");
-        },
-
-        ready: function() {
-          console.log("ready winjs-pivot");
-
-          this.setAttribute('role', 'tablist');
-          
-          // Initialization code here
-          
-          ....
-        },
-
-        attached: function() {
-          console.log("attached winjs-pivot");
-        },
-
-        domReady: function() {
-          console.log("domReady winjs-pivot");
-          ...
-        },
-
-        detached: function() {
-          console.log("detached winjs-pivot");
-        },
-
-        attributeChanged: function(attrName, oldVal, newVal) {
-          console.log("attributeChanged winjs-pivot: " + attrName, 'old: ' + oldVal, 'new:', newVal);
-        },
+    attributeChanged: function(attrName, oldVal, newVal) {
+      console.log("attributeChanged winjs-pivot: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+    },
 
 
-        // Gets or sets the index of the item in view.
-        get selectedIndex() {
-          if (this._items.length === 0) {
-              return -1;
+    // Gets or sets the index of the item in view.
+    get selectedIndex() {
+      if (this._items.length === 0) {
+          return -1;
+      }
+
+      if (+this._pendingIndexOnScreen === this._pendingIndexOnScreen) {
+          return this._pendingIndexOnScreen;
+      }
+
+      return this._currentIndexOnScreen;
+    },
+
+    set selectedIndex(value) {
+      if (value >= 0 && value < this._items.length) {
+          if (this._pendingRefresh) {
+              this._pendingIndexOnScreen = value;
+          } else {
+              this._navMode = this._navMode || navigationModes.api;
+              this._loadItem(value);
           }
+      }
+    },
+    
+    ...
+  });
 
-          if (+this._pendingIndexOnScreen === this._pendingIndexOnScreen) {
-              return this._pendingIndexOnScreen;
-          }
+})();
 
-          return this._currentIndexOnScreen;
-        },
-
-        set selectedIndex(value) {
-          if (value >= 0 && value < this._items.length) {
-              if (this._pendingRefresh) {
-                  this._pendingIndexOnScreen = value;
-              } else {
-                  this._navMode = this._navMode || navigationModes.api;
-                  this._loadItem(value);
-              }
-          }
-        },
-        
-        ...
-      });
-
-    })();
-  </script>
 ```
 
 The content of the `<template>` element is parsed by the parser, but it is inert: scripts aren't processed, images aren't downloaded, and so on. The `<template>` element is not rendered.
