@@ -58,9 +58,11 @@ http://winjsrocks.com/polymer-samples/
 
 # Demo Details
 
-## Markup
+## `<winjs-pivot` definition (using polymer)
 
 ```html
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
 <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
   <winjs-pivot-item header="all">
     <!-- core-list is polymer's virtualized list web component -->
