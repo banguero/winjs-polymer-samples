@@ -124,7 +124,14 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
       </div>
     </div>
   </template>
-  <script>
+  <script src="winjs-pivot.js"></script>
+</polymer-element>
+```
+
+where `winjs-pivot.js` is defined as:
+
+```javascript
+
     (function() {
 
       ...
@@ -193,7 +200,6 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
     })();
   </script>
-</polymer-element>
 ```
 
 The content of the `<template>` element is parsed by the parser, but it is inert: scripts aren't processed, images aren't downloaded, and so on. The `<template>` element is not rendered.
