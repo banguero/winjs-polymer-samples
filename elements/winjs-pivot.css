@@ -116,3 +116,7 @@ button.win-pivot-header:hover:active {
 :host.win-pivot-nosnap .win-pivot-surface {
   width: 100%;
 }
+
+.win-pivot-header {
+    opacity: 0.4;
+}
