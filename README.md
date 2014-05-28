@@ -138,7 +138,10 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 The content of the `<template>` element is parsed by the parser, but it is inert: scripts aren't processed, images aren't downloaded, and so on. The `<template>` element is not rendered.
 
-Notice that distributed nodes are elements that render at the insertion point (<content> element), in the main sample, it would be all the `<win-pivot-item>`.
+The <content> element allows selecting nodes from the Light DOM and render them at predefined locations in the Shadow DOM.
+
+Distributed nodes are elements that render at the insertion point (<content> element), in the main sample, it would be all the `<win-pivot-item>`.
+
 
 `winjs-pivot.js` is defined as:
 
@@ -230,7 +233,41 @@ Notice that distributed nodes are elements that render at the insertion point (<
 </polymer-element>
 ```
 
-Notice that distributed nodes are elements that render at the insertion point (<content> element), in the main sample, it would be `<core-list>` inside the first `<win-pivot-item>`.
+Notice that the distributed nodes are elements that render at the insertion point (<content> element), in the main sample, it would be `<core-list>` inside the first `<win-pivot-item>`.
+
+## Styling Summary (style encapsulation)
+
+* One of the core features of Shadow DOM is the shadow boundary. It has a lot of nice properties, but one of the best is that it provides style encapsulation for free. Other styles rules defined on the page that target elements (e.g h3) don't bleed into my content. That's because selectors don't cross the shadow boundary.
+* The `:host` allows you to select and style the element hosting a shadow tree
+* If an element has at least one shadow tree, the `::shadow` pseudo-element matches the shadow root itself.
+  ```css
+  #host::shadow span {
+    color: red;
+  }
+  ```
+  styles all of the spans within its shadow tree. Supported with querySelector:
+  ```javascript
+  document.querySelector('x-tabs::shadow x-panel::shadow #foo');
+  ```
+  so that you don't have to 
+  ```javascript
+  document.querySelector('x-tabs').shadowRoot
+          .querySelector('x-panel').shadowRoot
+          .querySelector('#foo');
+  ```
+* The `/deep/` combinator is similar to ::shadow, but more powerful. It completely ignores all shadow boundaries and crosses into any number of shadow trees (useful in the world of Custom Elements where it's common to have multiple levels of Shadow DOM)
+  ```css
+  x-tabs /deep/ x-panel {
+    ...
+  }
+  ```
+  select all <x-panel> elements that are descendants of <x-tabs>
+* `/deep/` is also useful to style navite elements (make the input[type="range"] inside the <video> control's pink, instead of rolling your own.
+* Distributed nodes (elements that render at an insertion point (a `<content>` element)) retain styles from the main document. They are still logically in the light dom and don't move. They just render elsewhere
+* Distributed nodes are children of the host element, so how can we target them from within the Shadow DOM? The answer is the CSS `::content` pseudo element. It's a way to target Light DOM nodes that pass through an insertion point. For example:  `::content > h3` styles any h3 tags that pass through an insertion point.
+
+* Eric Bidelman answered something I was wondering: *Do the `::shadow` pseudo-element and `/deep/` combinator defeat the purpose of style encapsulation? Out of the box, Shadow DOM prevents accidental styling from outsiders but it never promises to be a bullet proof vest. Developers should be allowed to intentionally style inner parts of your Shadow tree...if they know what they're doing. Having more control is also good for flexibility, theming, and the re-usability of your elements*.
+
 
 # Open Issues
 
