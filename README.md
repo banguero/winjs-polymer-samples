@@ -58,11 +58,15 @@ http://winjsrocks.com/polymer-samples/
 
 # Demo Details
 
-## `<winjs-pivot>` definition (using polymer)
+## Using `<winjs-pivot>`
 
 ```html
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<!-- HTML imports in <head> -->
+<link rel="import" href="elements/winjs-pivot.html"/>
+<link rel="import" href="elements/winjs-pivot-item.html"/>
+<link rel="import" href="bower_components/core-list/core-list.html">
 
+<!-- using <winjs-pivot> in the <body> -->
 <winjs-pivot title="INBOX - EMAIL" selectedIndex="0">
   <winjs-pivot-item header="all">
     <!-- core-list is polymer's virtualized list web component -->
@@ -114,6 +118,8 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 ## `<winjs-pivot>` definition with Polymer
 
 ```html
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
 <polymer-element name="winjs-pivot" constructor="Pivot">
   <template>
     <link rel="stylesheet" href="winjs-pivot.css">
@@ -205,7 +211,22 @@ The content of the `<template>` element is parsed by the parser, but it is inert
 })();
 
 ```
+`<winjs-pivot-item>` is defined as
 
+```html
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">
+  <template>
+    <link rel="stylesheet" href="winjs-pivot-item.css">
+
+    <div class="win-pivot-item-content">
+      <content></content>
+    </div>
+  </template>
+  <script src="winjs-pivot-item.js"></script>
+</polymer-element>
+```
 
 # Open Issues
 
