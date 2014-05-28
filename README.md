@@ -240,6 +240,8 @@ The content of the `<template>` element is parsed by the parser, but it is inert
 
 * Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is by exposing a specific element assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported in their polyfill?
 
+* is `:host(<selector>)` supported with polymer? (see http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/) did not seem to work for me when using `:host(.win-pivot-nosnap .win-pivot-surface)`
+
 * What is the story for dev tools to extract metadata of web components?
 
 * How does polymer work with modules? For example, `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">` would expose a global `PivotItem`. How does this interact with AMD? Is this a limitation of polymer or of HTML imports?
