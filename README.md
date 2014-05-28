@@ -138,6 +138,8 @@ every `<winjs-pivot-item>` has its own shadow root, and depending on what it con
 
 The content of the `<template>` element is parsed by the parser, but it is inert: scripts aren't processed, images aren't downloaded, and so on. The `<template>` element is not rendered.
 
+Notice that distributed nodes are elements that render at the insertion point (<content> element), in the main sample, it would be all the `<win-pivot-item>`.
+
 `winjs-pivot.js` is defined as:
 
 ```javascript
@@ -227,6 +229,8 @@ The content of the `<template>` element is parsed by the parser, but it is inert
   <script src="winjs-pivot-item.js"></script>
 </polymer-element>
 ```
+
+Notice that distributed nodes are elements that render at the insertion point (<content> element), in the main sample, it would be `<core-list>` inside the first `<win-pivot-item>`.
 
 # Open Issues
 
