@@ -7,7 +7,7 @@ Polymer (http://www.polymer-project.org/) is a library that uses the latest web 
 
 The purpose of this repo is to experiment creating web components based on existing WinJS controls, compare the development experience, and identify gaps in the current state of the specs.
 
-We start by building a `<winjs-pivot>` web component. Refer to (https://github.com/winjs/winjs/blob/master/src/js/WinJS/Controls/Pivot.js) for the source code of the existing WinJS Pivot control.
+We start by building a `<winjs-pivot>` web component. Refer to (https://github.com/winjs/winjs/blob/master/src/js/WinJS/Controls/Pivot.js) for the source code of the existing WinJS Pivot control. The Pivot control creates a tab control that displays multiple items.
 
 # Installation Steps
 
@@ -92,6 +92,12 @@ http://winjsrocks.com/polymer-samples/
 
 </winjs-pivot>
 ```
+
+This particular markup creates a Pivot with 4 tabs simulating a mail app:
+* all: which displays messages in a `<core-list>` web components (polymer's virtualized list)
+* unread
+* flagged
+* urgent: which display messages in a `WinJS.UI.ListView`
 
 ## DOM visualization (in Chrome Canary)
 
