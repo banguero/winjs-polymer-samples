@@ -240,21 +240,27 @@ Notice that the distributed nodes are elements that render at the insertion poin
 * One of the core features of Shadow DOM is the shadow boundary. It has a lot of nice properties, but one of the best is that it provides style encapsulation for free. Other styles rules defined on the page that target elements (e.g h3) don't bleed into my content. That's because selectors don't cross the shadow boundary.
 * The `:host` allows you to select and style the element hosting a shadow tree
 * If an element has at least one shadow tree, the `::shadow` pseudo-element matches the shadow root itself.
+
   ```css
   #host::shadow span {
     color: red;
   }
   ```
+  
   styles all of the spans within its shadow tree. Supported with querySelector:
+
   ```javascript
   document.querySelector('x-tabs::shadow x-panel::shadow #foo');
   ```
+
   so that you don't have to 
+
   ```javascript
   document.querySelector('x-tabs').shadowRoot
           .querySelector('x-panel').shadowRoot
           .querySelector('#foo');
   ```
+  
 * The `/deep/` combinator is similar to ::shadow, but more powerful. It completely ignores all shadow boundaries and crosses into any number of shadow trees (useful in the world of Custom Elements where it's common to have multiple levels of Shadow DOM)
   ```css
   x-tabs /deep/ x-panel {
