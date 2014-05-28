@@ -58,7 +58,7 @@ http://winjsrocks.com/polymer-samples/
 
 # Demo Details
 
-## `<winjs-pivot` definition (using polymer)
+## `<winjs-pivot>` definition (using polymer)
 
 ```html
 <link rel="import" href="../bower_components/polymer/polymer.html">
