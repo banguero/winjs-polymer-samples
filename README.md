@@ -275,23 +275,23 @@ Notice that the distributed nodes are elements that render at the insertion poin
 * Eric Bidelman answered something I was wondering: *Do the `::shadow` pseudo-element and `/deep/` combinator defeat the purpose of style encapsulation? Out of the box, Shadow DOM prevents accidental styling from outsiders but it never promises to be a bullet proof vest. Developers should be allowed to intentionally style inner parts of your Shadow tree...if they know what they're doing. Having more control is also good for flexibility, theming, and the re-usability of your elements*.
 
 
-# Open Issues
+# Issues Discussed
 
-* What is the recommended way to define statics with polymer for polymer-element class? (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot-item.html). Looking for something different than (http://www.polymer-project.org/docs/polymer/polymer.html#static) where if the definition is `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">`, I would like to set `PivotItem.isDeclarativeControlContainer` to a function after `PivotItem` is defined.
+* [#2] (https://github.com/banguero/winjs-polymer-samples/issues/2) - What is the recommended way to define statics with polymer for polymer-element class?  (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot-item.html). Looking for something different than (http://www.polymer-project.org/docs/polymer/polymer.html#static) where if the definition is `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">`, I would like to set `PivotItem.isDeclarativeControlContainer` to a function after `PivotItem` is defined.
 
-* In Chrome Canary - `domReady` fires after all the nested `<win-pivot-items>` have been attached; however, on other browsers (e.g. regular Chrome), it does not wait for the children web components to be attached. What is the recommended pattern to determine when the nested web components are also attached? The `WebComponentsReady` event seems to work as a work-around in regular Chrome, but it gets fired too early in Safari. The prototype is using a random timeout for now, which explains why it takes a while to first load. (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot.html)
+* [#3] (https://github.com/banguero/winjs-polymer-samples/issues/3) - In Chrome Canary - `domReady` fires after all the nested `<win-pivot-items>` have been attached; however, on other browsers (e.g. regular Chrome), it does not wait for the children web components to be attached. What is the recommended pattern to determine when the nested web components are also attached? The `WebComponentsReady` event seems to work as a work-around in regular Chrome, but it gets fired too early in Safari. The prototype is using a random timeout for now, which explains why it takes a while to first load. (https://github.com/banguero/winjs-polymer-samples/blob/master/elements/winjs-pivot.html)
 
 * WinJS Binding templates issue - declaring binding template directly in the body otherwise, we fail to find it due to shadow dom encapsulation (https://github.com/banguero/winjs-polymer-samples/blob/master/index.html)
 
 * WinJS ListView issue when used inside `<winjs-pivot-item>` webcomponent. The ListView's `isZombie` check to determine if it has been disposed relies on `document.body.contains(this.element)`, which fails due to shallow dom encapsulation. For now, ui.js is always returning false for isZombie checks.
 
-* Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is by exposing a specific element assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported in their polyfill?
+* [#6] (https://github.com/banguero/winjs-polymer-samples/issues/6) - Style content in a shadow DOM subtree. This spec (http://w3c.github.io/webcomponents/explainer/) indicates that one of the two ways to permit the page to style content in a shadow DOM subtree in a controlled way is by exposing a specific element assigning it a pseudo ID. Author styles can then refer to it as a pseudo-element. I could not find anything in Polymer's docs about this. Is that not supported in their polyfill?
 
-* is `:host(<selector>)` supported with polymer? or is there a restriction on the complexity of the `<selector>`?  (see http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/). `:host(.win-pivot-nosnap .win-pivot-surface)` did not seem to work for me.
+* [#7] (https://github.com/banguero/winjs-polymer-samples/issues/7) - is `:host(<selector>)` supported with polymer? or is there a restriction on the complexity of the `<selector>`?  (see http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/). `:host(.win-pivot-nosnap .win-pivot-surface)` did not seem to work for me.
 
-* What is the story for dev tools to extract metadata of web components?
+* [#8] (https://github.com/banguero/winjs-polymer-samples/issues/8) - What is the story for dev tools to extract metadata of web components?
 
-* How does polymer work with modules? For example, `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">` would expose a global `PivotItem`. How does this interact with AMD? Is this a limitation of polymer or of HTML imports?
+* [#9] (https://github.com/banguero/winjs-polymer-samples/issues/9) - How does polymer work with modules? For example, `<polymer-element name="winjs-pivot-item" constructor="PivotItem" attributes="header">` would expose a global `PivotItem`. How does this interact with AMD? Is this a limitation of polymer or of HTML imports?
 
 
 # Appendix
