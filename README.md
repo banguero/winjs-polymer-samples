@@ -306,6 +306,7 @@ Notice that the distributed nodes are elements that render at the insertion poin
 * Shadow DOM 101 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/)
 * Shadow DOM 201 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/)
 * Shadow DOM 301 (http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-301/)
+* Shadow DOM Top 10 List survey (https://www.surveymonkey.com/results/SM-SQX77WF/)
 * CSS Scoping  (http://dev.w3.org/csswg/css-scoping/)
 * Polymer (lots of info there) http://www.polymer-project.org/
 * Polymer core elements (http://polymer.github.io/core-docs/)
