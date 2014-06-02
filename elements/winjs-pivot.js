@@ -91,16 +91,8 @@
       domReady: function() {
         console.log("domReady winjs-pivot");
 
-        // Hmm, in Chrome canary - domReady fires after all the nested win-pivot-items have been attached; however,
-        // on other browsers, it does not wait for the children to be attached. What is the recommended pattern to determine
-        // when the nested components are also attached? The WebComponentsReady event seems to work as a work-around in regular
-        // Chrome, but it gets fired too early in Safari, using a random timeout for now
-        var that = this;
-        WinJS.Promise.timeout(1500).then(function() {
-          that._parse();
-          that._refresh();
-        });
-
+       this._parse();
+       this._refresh();
       },
 
       detached: function() {
@@ -108,7 +100,7 @@
       },
 
       attributeChanged: function(attrName, oldVal, newVal) {
-        console.log("attributeChanged winjs-pivot: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+        //console.log("attributeChanged winjs-pivot: " + attrName, 'old: ' + oldVal, 'new:', newVal);
       },
 
       // Gets the DOM element that hosts the Pivot.

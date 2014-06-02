@@ -45,7 +45,7 @@
     },
 
     attributeChanged: function(attrName, oldVal, newVal) {
-          console.log("attributeChanged winjs-pivot-item: " + attrName, 'old: ' + oldVal, 'new:', newVal);
+          //console.log("attributeChanged winjs-pivot-item: " + attrName, 'old: ' + oldVal, 'new:', newVal);
     },
 
     // Gets the DOM element that hosts the PivotItem.
