@@ -22,17 +22,6 @@
     <a class="source" href="https://github.com/banguero/winjs-polymer-samples" target="_blank">view source (GitHub)</a>
     <winjs-pivot-sample class="sample"></winjs-pivot-sample>
 
-    <!-- defining binding template directly in the body otherwise, we fail to find it due to shadow dom encapsulation -->
-    <div class="mailItemTemplate" data-win-control="WinJS.Binding.Template">
-      <div class="item">
-        <div class="message">
-          <div class="from" data-win-bind="innerHTML: name"></div>
-          <div class="subject win-pivot-slide1" data-win-bind="innerHTML: subject"></div>
-          <div class="details win-pivot-slide2" data-win-bind="innerHTML: details"></div>
-        </div>
-      </div>
-    </div>
-
     <polymer-element name="winjs-pivot-sample">
       <template>
         <link rel="stylesheet" href="css/winjs-pivot-sample.css">
@@ -61,6 +50,16 @@
           </winjs-pivot-item>
 
           <winjs-pivot-item header="urgent">
+            <div class="mailItemTemplate" data-win-control="WinJS.Binding.Template">
+              <div class="item">
+                <div class="message">
+                  <div class="from" data-win-bind="innerHTML: name"></div>
+                  <div class="subject win-pivot-slide1" data-win-bind="innerHTML: subject"></div>
+                  <div class="details win-pivot-slide2" data-win-bind="innerHTML: details"></div>
+                </div>
+              </div>
+            </div>
+
             <div class="urgentLV" data-win-control="WinJS.UI.ListView" data-win-options="{ itemDataSource: Urgent.dataSource, layout: { type: WinJS.UI.ListLayout }, itemTemplate: select('.mailItemTemplate'), selectionMode: 'none' }"></div>
           </winjs-pivot-item>
 
@@ -77,6 +76,11 @@
               this.data = this.generateData();
             },
             domReady: function() {
+              var mailItemTemplate = this.shadowRoot.querySelector(".mailItemTemplate");
+              // @TODO, somewhat hacky, ideally msParentSelectorScope is set on ShadowRoot children or select is modified
+              // to support shadow tree traversal.
+              mailItemTemplate.parentNode.msParentSelectorScope = true;
+              WinJS.UI.process(mailItemTemplate);
               WinJS.UI.process(this.shadowRoot.querySelector(".urgentLV"));
             },
             generateData: function() {
@@ -107,10 +111,5 @@
         })();  
       </script>
     </polymer-element>
-    <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function() {
-        WinJS.UI.process(document.querySelector(".mailItemTemplate"));
-      });
-    </script>
   </body>
 </html>
