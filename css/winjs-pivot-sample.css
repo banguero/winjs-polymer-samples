@@ -12,6 +12,7 @@
 
 core-list {
   height: 100%;
+  width: 380px;
 }
 
 .item {
@@ -47,7 +48,7 @@ core-list {
 
 .win-listview {
   height: 100%;
-}
+  }
 
 .win-listview .win-container {
   height: 80px;
@@ -55,3 +56,11 @@ core-list {
   margin-bottom: 20px;
 }
 
+::-webkit-scrollbar {
+    background-color:transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border:1px solid rgba(220,220,220, 0.3);
+}

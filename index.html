@@ -99,15 +99,17 @@
             }
           });
 
-          var data = [];
-          for (var i = 0; i <  5; i++) {
-            data.push({ name: "Chris Anderson", subject: "QuickStart's and How To's", details: "More information on how to use WinJS controls"});
-            data.push({ name: "Paul Gusmorino", subject: "Going out saturday", details: "Jean and I are leaving..." });
-            data.push({ name: "Kevin Smith", subject: "Happend every time", details: "I always end up going to the ..." });
-            data.push({ name: "Edgar Banguero", subject: "Missed conversation with Michael Brown", details: "Michael Brown [1:53 PM]: Thanks for taking the time..."});
-            data.push({ name: "Paul Gildea", subject: "Need help later", details: "I was hoping you could help me with..."});
-          }
-          window.Urgent = { dataSource: new WinJS.Binding.List(data).dataSource };
+          document.addEventListener("WebComponentsReady", function() {
+            var data = [];
+            for (var i = 0; i <  5; i++) {
+              data.push({ name: "Chris Anderson", subject: "QuickStart's and How To's", details: "More information on how to use WinJS controls"});
+              data.push({ name: "Paul Gusmorino", subject: "Going out saturday", details: "Jean and I are leaving..." });
+              data.push({ name: "Kevin Smith", subject: "Happend every time", details: "I always end up going to the ..." });
+              data.push({ name: "Edgar Banguero", subject: "Missed conversation with Michael Brown", details: "Michael Brown [1:53 PM]: Thanks for taking the time..."});
+              data.push({ name: "Paul Gildea", subject: "Need help later", details: "I was hoping you could help me with..."});
+            }
+            window.Urgent = { dataSource: new WinJS.Binding.List(data).dataSource };
+          })
         })();  
       </script>
     </polymer-element>
