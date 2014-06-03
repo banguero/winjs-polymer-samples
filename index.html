@@ -50,7 +50,7 @@
           </winjs-pivot-item>
 
           <winjs-pivot-item header="urgent">
-            <div class="mailItemTemplate" data-win-control="WinJS.Binding.Template">
+            <div class="mailItemTemplate" is="winjs-control" data-win-control="WinJS.Binding.Template">
               <div class="item">
                 <div class="message">
                   <div class="from" data-win-bind="innerHTML: name"></div>
@@ -60,7 +60,7 @@
               </div>
             </div>
 
-            <div class="urgentLV" data-win-control="WinJS.UI.ListView" data-win-options="{ itemDataSource: Urgent.dataSource, layout: { type: WinJS.UI.ListLayout }, itemTemplate: select('.mailItemTemplate'), selectionMode: 'none' }"></div>
+            <div class="urgentLV" is="winjs-control" data-win-control="WinJS.UI.ListView" data-win-options="{ itemDataSource: Urgent.dataSource, layout: { type: WinJS.UI.ListLayout }, itemTemplate: select('.mailItemTemplate'), selectionMode: 'none' }"></div>
           </winjs-pivot-item>
 
         </winjs-pivot>
@@ -74,14 +74,6 @@
             count: 1000,
             ready: function() {
               this.data = this.generateData();
-            },
-            domReady: function() {
-              var mailItemTemplate = this.shadowRoot.querySelector(".mailItemTemplate");
-              // @TODO, somewhat hacky, ideally msParentSelectorScope is set on ShadowRoot children or select is modified
-              // to support shadow tree traversal.
-              mailItemTemplate.parentNode.msParentSelectorScope = true;
-              WinJS.UI.process(mailItemTemplate);
-              WinJS.UI.process(this.shadowRoot.querySelector(".urgentLV"));
             },
             generateData: function() {
               var data = [];
