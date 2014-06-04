@@ -248,7 +248,7 @@
           if (this.selectedItem) {
               this.selectedItem.elementHost.style[this._getDirectionAccessor()] = this._currentScrollTargetLocation + 'px';
           }
-          console.log('_recenterUI index:' + this.selectedIndex + ' offset: ' + this._offsetFromCenter + ' scrollLeft: ' + this._currentScrollTargetLocation);
+          //console.log('_recenterUI index:' + this.selectedIndex + ' offset: ' + this._offsetFromCenter + ' scrollLeft: ' + this._currentScrollTargetLocation);
           this._viewportElement.scrollLeft = this._currentScrollTargetLocation;
       },
 

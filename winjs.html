@@ -7,35 +7,35 @@
 
 (function() {
 
-var toProcess = [];
+    var toProcess = [];
 
-document.addEventListener('polymer-ready', function() {
-  console.group('winjs-control processing on polymer-ready');
-  toProcess.forEach(function(item) {
-    console.log('WinJS.UI.process', item);
-    WinJS.UI.process(item);
-  });
-  console.groupEnd();
-}, false);
+    document.addEventListener('polymer-ready', function() {
+      console.group('winjs-control processing on polymer-ready');
+      toProcess.forEach(function(item) {
+        console.log('WinJS.UI.process', item);
+        WinJS.UI.process(item);
+      });
+      console.groupEnd();
+    }, false);
 
-// A generalized bootsrap custom element for WinJS controls.
-// Usage: <div is="winjs-control" ...></div>
-// At the moment, simply calls WinJS.UI.process at the right time.
-function WinJSControlBootstrap() {}
-WinJSControlBootstrap.extends = 'div';
-WinJSControlBootstrap.prototype = Object.create(HTMLDivElement.prototype);
-WinJSControlBootstrap.prototype.attachedCallback = function() {
-  console.log('WinJSControlBootstrap.prototype.attachedCallback', this);
-  // @TODO, somewhat hacky, ideally msParentSelectorScope is set on ShadowRoot children or select is modified
-  // to support shadow tree traversal.
-  var isTemplate = this.getAttribute('data-win-control') == 'WinJS.Binding.Template';
-  if (isTemplate && this.parentNode) {
-    this.parentNode.msParentSelectorScope = true;
-  }
-  toProcess.push(this);
-}
+    // A generalized bootstrap custom element for WinJS controls.
+    // Usage: <div is="winjs-control" ...></div>
+    // At the moment, simply calls WinJS.UI.process at the right time.
+    function WinJSControlBootstrap() {}
+    WinJSControlBootstrap.extends = 'div';
+    WinJSControlBootstrap.prototype = Object.create(HTMLDivElement.prototype);
+    WinJSControlBootstrap.prototype.attachedCallback = function() {
+        console.log('WinJSControlBootstrap.prototype.attachedCallback', this);
+        // @TODO, somewhat hacky, ideally msParentSelectorScope is set on ShadowRoot children or select is modified
+        // to support shadow tree traversal.
+        var isTemplate = this.getAttribute('data-win-control') == 'WinJS.Binding.Template';
+        if (isTemplate && this.parentNode) {
+            this.parentNode.msParentSelectorScope = true;
+        }
+        toProcess.push(this);
+    }
 
-document.registerElement('winjs-control', WinJSControlBootstrap);
+    document.registerElement('winjs-control', WinJSControlBootstrap);
 
 }());
 
