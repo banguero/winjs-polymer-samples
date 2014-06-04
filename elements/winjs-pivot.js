@@ -455,7 +455,7 @@
           var pivotItemEl = this.firstElementChild;
 
           while (pivotItemEl) {
-              WinJS.UI.processAll(pivotItemEl);
+              WinJS.UI.process(pivotItemEl);
 
               if (pivotItemEl.tagName.toLowerCase() === "winjs-pivot-item") {
                   pivotItems.push(pivotItemEl);
