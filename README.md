@@ -268,7 +268,7 @@ Notice that the distributed nodes are elements that render at the insertion poin
   }
   ```
   select all <x-panel> elements that are descendants of <x-tabs>
-* `/deep/` is also useful to style navite elements (make the input[type="range"] inside the <video> control's pink, instead of rolling your own.
+* `/deep/` is also useful to style native elements (make the input[type="range"] inside the <video> control's pink, instead of rolling your own.
 * Distributed nodes (elements that render at an insertion point (a `<content>` element)) retain styles from the main document. They are still logically in the light dom and don't move. They just render elsewhere
 * Distributed nodes are children of the host element, so how can we target them from within the Shadow DOM? The answer is the CSS `::content` pseudo element. It's a way to target Light DOM nodes that pass through an insertion point. For example:  `::content > h3` styles any h3 tags that pass through an insertion point.
 
