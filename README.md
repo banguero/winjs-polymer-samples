@@ -242,7 +242,7 @@ Notice that the distributed nodes are elements that render at the insertion poin
 * If an element has at least one shadow tree, the `::shadow` pseudo-element matches the shadow root itself.
 
   ```css
-  #host::shadow span {
+  #myEl::shadow span {
     color: red;
   }
   ```
